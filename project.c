@@ -127,7 +127,7 @@ void read_register(unsigned r1, unsigned r2, unsigned *Reg, unsigned *data1, uns
 /* 10 Points */
 void sign_extend(unsigned offset, unsigned *extended_value)
 {
-    if ((offset >> 15))
+    if ((offset >> 15) == 1)
         *extended_value = offset | 0xffff0000;
     else
         *extended_value = offset & 0x0000ffff;
@@ -142,12 +142,25 @@ int ALU_operations(unsigned data1, unsigned data2, unsigned extended_value, unsi
     switch (ALUOp)
     {
     case 0x0:
+        ALUOp = 0x0;
+        break;
     case 0x1:
+        ALUOp = 0x1;
+        break;
     case 0x2:
+        ALUOp = 0x2;
+        break;
     case 0x3:
+        ALUOp = 0x3;
+        break;
     case 0x4:
+        ALUOp = 0x4;
+        break;
     case 0x5:
+        ALUOp = 0x5;
+        break;    
     case 0x6:
+        ALUControl = 0x6;
         break;
     case 0x7:
         switch (funct)
@@ -168,11 +181,11 @@ int ALU_operations(unsigned data1, unsigned data2, unsigned extended_value, unsi
             ALUControl = 0x3;
             break;
         default:
-            return 1;
+            return -1;
         }
         break;
     default:
-        return 1;
+        return -1;
     }
 
     unsigned temp;
