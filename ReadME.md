@@ -1,6 +1,6 @@
 For running:
 
-Step 1: gcc *.c -lm -fsanitize=address -fno-omit-frame-pointer -g
+Step 1: gcc *.c
 
 Step 2 (MacOS/Linux): ./a.out input_file.asc
 
