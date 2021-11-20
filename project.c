@@ -4,7 +4,6 @@
 /* 10 Points */
 void ALU(unsigned A, unsigned B, char ALUControl, unsigned *ALUresult, char *Zero)
 {
-    printf("ALUControl %d\n", ALUControl);
     if (A - B == 0)
         *Zero = 1;
     else
@@ -12,11 +11,9 @@ void ALU(unsigned A, unsigned B, char ALUControl, unsigned *ALUresult, char *Zer
     switch (ALUControl)
     {
     case 0x0:
-        printf("\n\ninside addition\n\n");
         *ALUresult = A + B;
         break;
     case 0x1:
-        printf("\n\ninside subtract\n\n");
         *ALUresult = A - B;
         break;
     case 0x2:
@@ -30,15 +27,9 @@ void ALU(unsigned A, unsigned B, char ALUControl, unsigned *ALUresult, char *Zer
         else if ((A & (1 << 31)) && (B & (1 << 31)))
         {
             if (A > B)
-            {
-                printf("\n\ninside greater than if\n\n");
                 *ALUresult = 1;
-            }
             else
-            {
-                printf("\n\ninside greater than else\n\n");
                 *ALUresult = 0;
-            }
         }
         else if (!(A & (1 << 31)) && (B & (1 << 31)))
             *ALUresult = 0;
@@ -47,22 +38,14 @@ void ALU(unsigned A, unsigned B, char ALUControl, unsigned *ALUresult, char *Zer
         break;
     case 0x3:
         if (A < B)
-        {
-            printf("\n\ninside less than if\n\n");
             *ALUresult = 1;
-        }
         else
-        {
-            printf("\n\ninside less than else\n\n");
             *ALUresult = 0;
-        }
         break;
     case 0x4:
-        printf("\n\ninside and\n\n");
         *ALUresult = A & B;
         break;
     case 0x5:
-        printf("\n\ninside or\n\n");
         *ALUresult = A | B;
         break;
     case 0x6:
@@ -101,7 +84,6 @@ void instruction_partition(unsigned instruction, unsigned *op, unsigned *r1, uns
 /* 15 Points */
 int instruction_decode(unsigned op, struct_controls *controls)
 {
-    printf("\nControls: %d\n", controls);
     switch (op)
     {
     case 0x0:
@@ -160,32 +142,18 @@ void sign_extend(unsigned offset, unsigned *extended_value)
 int ALU_operations(unsigned data1, unsigned data2, unsigned extended_value, unsigned funct, char ALUOp, char ALUSrc, unsigned *ALUresult, char *Zero)
 {
     unsigned char ALUControl = ALUOp;
-    printf("\nALUOp: %d\n", ALUOp);
+
     switch (ALUOp)
     {
     case 0x0:
-        ALUOp = 0x0;
-        break;
     case 0x1:
-        ALUOp = 0x1;
-        break;
     case 0x2:
-        ALUOp = 0x2;
-        break;
     case 0x3:
-        ALUOp = 0x3;
-        break;
     case 0x4:
-        ALUOp = 0x4;
-        break;
     case 0x5:
-        ALUOp = 0x5;
-        break;
     case 0x6:
-        ALUControl = 0x6;
         break;
     case 0x7:
-        printf("\nfunct: %d\n", funct);
         switch (funct)
         {
         case 0x20:
