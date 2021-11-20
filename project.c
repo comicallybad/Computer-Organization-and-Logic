@@ -20,38 +20,49 @@ void ALU(unsigned A, unsigned B, char ALUControl, unsigned *ALUresult, char *Zer
         *ALUresult = A - B;
         break;
     case 0x2:
-        if (!(A & (1 << 31)) && !(B & (1 << 31))){
-            if(A < B)
+        if (!(A & (1 << 31)) && !(B & (1 << 31)))
+        {
+            if (A < B)
                 *ALUresult = 1;
             else
                 *ALUresult = 0;
-        }else if ((A & (1 << 31)) && (B & (1 << 31))){
-            if(A > B){
-                    printf("\n\ninside greater than if\n\n");
+        }
+        else if ((A & (1 << 31)) && (B & (1 << 31)))
+        {
+            if (A > B)
+            {
+                printf("\n\ninside greater than if\n\n");
                 *ALUresult = 1;
-            }else{
-                    printf("\n\ninside greater than else\n\n");
+            }
+            else
+            {
+                printf("\n\ninside greater than else\n\n");
                 *ALUresult = 0;
-        }}else if (!(A & (1 << 31)) && (B & (1 << 31)))
+            }
+        }
+        else if (!(A & (1 << 31)) && (B & (1 << 31)))
             *ALUresult = 0;
         else
             *ALUresult = 1;
         break;
     case 0x3:
-        if(A < B){
-                printf("\n\ninside less than if\n\n");
+        if (A < B)
+        {
+            printf("\n\ninside less than if\n\n");
             *ALUresult = 1;
-        }else{
-                printf("\n\ninside less than else\n\n");
+        }
+        else
+        {
+            printf("\n\ninside less than else\n\n");
             *ALUresult = 0;
         }
         break;
     case 0x4:
-            printf("\n\ninside and\n\n");
+        printf("\n\ninside and\n\n");
         *ALUresult = A & B;
         break;
     case 0x5:
-            printf("\n\ninside or\n\n");
+        printf("\n\ninside or\n\n");
         *ALUresult = A | B;
         break;
     case 0x6:
@@ -169,7 +180,7 @@ int ALU_operations(unsigned data1, unsigned data2, unsigned extended_value, unsi
         break;
     case 0x5:
         ALUOp = 0x5;
-        break;    
+        break;
     case 0x6:
         ALUControl = 0x6;
         break;
@@ -204,7 +215,7 @@ int ALU_operations(unsigned data1, unsigned data2, unsigned extended_value, unsi
     }
 
     unsigned temp;
-    if(ALUSrc == 1)
+    if (ALUSrc == 1)
         temp = extended_value;
     else
         temp = data2;
